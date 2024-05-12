@@ -6,10 +6,16 @@ export interface City {
   name: string;
 }
 
-const initialState: { cities: City[], currentUnit: CurrentUnit, isSearching: boolean } = {
+const initialState: { 
+  cities: City[], 
+  currentUnit: CurrentUnit, 
+  isSearching: boolean 
+  backdropCode: number
+} = {
   cities: [],
   currentUnit: 'm',
-  isSearching: false
+  isSearching: false,
+  backdropCode: 0
 };
 
 const searchedCitiesSlice = createSlice({
@@ -32,8 +38,17 @@ const searchedCitiesSlice = createSlice({
     updateIsSearching(state, action: {payload: boolean}) {
       state.isSearching = action.payload;
     },
+    updateBackdropCode(state, action: {payload: number}) {
+      state.backdropCode = action.payload;
+    },
   },
 });
 
-export const {addCity, removeCity, updateUnit, updateIsSearching} = searchedCitiesSlice.actions;
+export const {
+  addCity,
+  removeCity,
+  updateUnit,
+  updateIsSearching,
+  updateBackdropCode
+} = searchedCitiesSlice.actions;
 export default searchedCitiesSlice.reducer;

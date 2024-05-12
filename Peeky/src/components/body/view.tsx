@@ -16,11 +16,7 @@ import {
   StatNumber,
   Image
 } from '@chakra-ui/react'
-// import React, { useEffect } from 'react';
-// import {useSelector} from 'react-redux';
-import type {CurrentResponse,
-  // CurrentUnit
-} from '../../types/response';
+import type {CurrentResponse} from '../../types/response';
 import {CiLocationArrow1} from "react-icons/ci";
 
 interface ViewProps {
@@ -28,44 +24,12 @@ interface ViewProps {
 }
     
 const View: React.FunctionComponent<ViewProps> = ({data}) => {
-  // const [pending, setPending] = React.useState(false);
-  // const [withData, setWithData] = React.useState(false);
-  // const [viewData, setViewData] = React.useState<CurrentResponse>();
-  // const [error, setError] = React.useState<Error>();
-
-  // const searchedCities: City[] = useSelector((s: RootState) => s.searchedCities.cities);
-  // const currentUnit: CurrentUnit = useSelector((s: RootState) => s.searchedCities.currentUnit);
-
-  // const handleMock = () => {
-  //   setPending(false);
-  //   setWithData(true);
-  //   setViewData(MOCKDATA);
-  // };
-
-  // useEffect(() => {
-  //   if (searchedCities.length > 0) {
-  //     setPending(true);
-  //     fetchData<CurrentResponse>('GET', currentUnit, {query: searchedCities[searchedCities.length - 1].name})
-  //       .then(data => {
-  //         setPending(false);
-  //         setWithData(true);
-  //         setViewData(data);
-  //       })
-  //       .catch((error: Error) => {
-  //         setPending(false);
-  //         setWithData(false);
-  //         setError(error);
-  //       });
-  //   }
-  //   // Intended missied currentUnit dependency, its change shouldn't trigger calls
-  // }, [searchedCities]);
   const {location, current} = data;
   
   return (
     <Flex w='100%' h='100%' p={4}>
       <Grid
-        h='65vh'
-        // h='70vh'
+        h='70vh'
         w='90vw'
         templateRows='repeat(2, 1fr)'
         templateColumns='repeat(5, 1fr)'

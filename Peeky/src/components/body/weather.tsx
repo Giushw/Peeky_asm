@@ -9,7 +9,8 @@ import {
   Button
 } from '@chakra-ui/react'
 import React, { useEffect } from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {updateBackdropCode} from '../../store/slice';
 import type {CurrentResponse, CurrentUnit} from '../../types/response';
 import type {Error} from '../../types/error';
 import type {City} from '../../store/slice';
@@ -77,7 +78,6 @@ const PendingState: React.FunctionComponent = () => (
   </VStack>
 );
 
-// Common props
 interface viewState {
   mockFn: () => void;
 }
@@ -122,19 +122,21 @@ interface FullStateProps extends viewState {
 }
 
 const FullState: React.FunctionComponent<FullStateProps> = ({data, mockFn}) => {
+  const dispatch = useDispatch();
 
   const dataFound = () => {
     if (data) {
       // Type guard to discern case
       if ('success' in data) {
-        // Fake Error (200 with error inside)
+        // Fake 200 (200 with error inside)
         return false;
       } else {
         // 200
-        return true
+        dispatch(updateBackdropCode(data.current.weather_code));
+        return true;
       }
     } else {
-      // Genuine errors
+      // Genuine error
       return false;
     }
   };
