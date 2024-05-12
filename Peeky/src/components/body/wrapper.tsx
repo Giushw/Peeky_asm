@@ -1,6 +1,5 @@
 import {
   Flex,
-  Button,
   Heading,
   Text,
   Highlight,
@@ -8,21 +7,26 @@ import {
   VStack,
   Collapse,
   useDisclosure
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
 import Weather from './weather';
   
 const Wrapper: React.FunctionComponent = () => {
-  const { isOpen, onToggle } = useDisclosure()
+  const isSearching: boolean = useSelector((s: RootState) => s.searchedCities.isSearching);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  
+  useEffect(() => {
+    isSearching ? onOpen() : onClose()
+  },[isSearching]);
 
   return (
     <Flex w='100%' h='100%' align='center' justify='center' p={4} direction='column'>
-      {/* TODO: REmove this btn */}
-      <Button onClick={onToggle}>Click Me</Button> 
-
-      <Collapse in={isOpen} animateOpacity>
+      <Collapse in={!isOpen} animateOpacity>
         <Splash />
       </Collapse>
-      <Collapse in={!isOpen} animateOpacity>
+      <Collapse in={isOpen} animateOpacity>
         <Weather />
       </Collapse>
     </Flex>

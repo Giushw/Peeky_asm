@@ -1,8 +1,11 @@
+export type CurrentUnit = 'm' | 'f' | 's';
+type RequestType = 'City' | 'LatLon' | 'IP' | 'Zipcode';
+
 interface Request {
-  type: 'City',
+  type: RequestType,
   query: string,
   language: 'en',
-  unit: 'm' | 'f'
+  unit: CurrentUnit
 }
 
 interface Location {
@@ -22,10 +25,10 @@ interface Current {
   temperature: number,
   weather_code: number,
   weather_icons: string[],
-  weather_descriptions: string[], // or Literal[]?
+  weather_descriptions: string[],
   wind_speed: number,
   wind_degree: number,
-  wind_dir: string, // or WindRose literal?
+  wind_dir: string,
   pressure: number,
   precip: number,
   humidity: number,
@@ -33,7 +36,7 @@ interface Current {
   feelslike: number,
   uv_index: number,
   visibility: number,
-  is_day: string  // 'yes' | 'no' 
+  is_day: string
 }
 
 export interface CurrentResponse {

@@ -13,13 +13,15 @@ import {
   DrawerCloseButton,
   VStack,
   StackDivider,
-  useDisclosure,
-  Flex
+  Flex,
+  FormLabel,
+  Switch,
+  useDisclosure
 } from '@chakra-ui/react';
 import {Search2Icon} from '@chakra-ui/icons';
 import {useDispatch, useSelector} from 'react-redux';
 import React, { useEffect } from 'react';
-import {addCity, type City, removeCity} from '../../store/slice';
+import {addCity, type City, removeCity, updateUnit, updateIsSearching} from '../../store/slice';
 import {generateId} from '../../utils/lib';
 import {RootState} from '../../store/store';
 
@@ -27,29 +29,38 @@ const Search: React.FunctionComponent = () => {
   const firstField = React.useRef();
   const [value, setValue] = React.useState('');
 
+  const [isCelsius, setIsCelsius] = React.useState(true);
+
   const {isOpen, onOpen, onClose} = useDisclosure();
   const dispatch = useDispatch();
   const searchedCities: City[] = useSelector((s: RootState) => s.searchedCities.cities);
 
-  const handleSearch = (city: City) => { 
-    dispatch(addCity(city));
-  };
-
+  //@ts-expect-error Browser Event is any for semplicity
   const handleChange = (event) => setValue(event.target.value);
 
-  const onChronoClick = (emitter: string) => console.log('Clicked: ', emitter);
+  const onUnitChange = (unit: boolean) => {
+    setIsCelsius(unit);
+    dispatch(updateUnit( unit ? 'm' : 'f' ));
+  };
 
   const onSearch = () => {
-    handleSearch({
+    dispatch(addCity({
       id: generateId(),
-      name: value
-    });
+      name: value,
+    }));
+    dispatch(updateIsSearching(true));
     onClose();
   };
 
-  const onCancel = () => {
+  const onClean = () => {
     setValue('');
   }
+
+  const onChronoClick = (city: City) => {
+    const findCity = searchedCities.filter(c => c.id === city.id);
+    dispatch(removeCity(findCity[0]));
+    dispatch(addCity(city));
+};
 
   useEffect(() => {
     if (searchedCities && searchedCities.length > 5) {
@@ -69,6 +80,7 @@ const Search: React.FunctionComponent = () => {
         isOpen={isOpen}
         placement='right'
         onClose={onClose}
+        //@ts-expect-error Error between MutableRefObject<undefined and RefObject<FocusableElement
         initialFocusRef={firstField}
       >
         <DrawerOverlay />
@@ -87,6 +99,7 @@ const Search: React.FunctionComponent = () => {
                     Where do you want to peek?
                   </Heading>
                   <Input 
+                    //@ts-expect-error error between MutableRefObject<undefined> and LegacyRef<HTMLInputElement>
                     ref={firstField}
                     color='blackAlpha.800'
                     size='lg'
@@ -97,8 +110,23 @@ const Search: React.FunctionComponent = () => {
                     value={value}
                     onChange={handleChange}
                   />
+                  <Flex alignItems='center' justifyContent='end'>
+                    <FormLabel htmlFor='temp-unit' mb='0'>
+                      F°
+                    </FormLabel>
+                    <Switch 
+                      id='temp-unit' 
+                      colorScheme='teal'
+                      size='md' 
+                      isChecked={isCelsius} 
+                      onChange={() => onUnitChange(!isCelsius)}
+                    />
+                    <FormLabel htmlFor='temp-unit' mb='0' ml={4}>
+                      C°
+                    </FormLabel>
+                  </Flex>
                   <ButtonGroup variant='outline' spacing='3'>
-                    <Button colorScheme='blackAlpha' variant='solid' onClick={onCancel}>
+                    <Button colorScheme='blackAlpha' variant='solid' onClick={onClean}>
                       Clean
                     </Button>
                     <Button colorScheme='teal' variant='solid'  onClick={onSearch}>
@@ -121,7 +149,7 @@ const Search: React.FunctionComponent = () => {
                           variant='solid' 
                           size='lg'
                           mb={3}
-                          onClick={() => onChronoClick(city.name)}
+                          onClick={() => onChronoClick(city)}
                         >
                           {city.name}
                         </Button>

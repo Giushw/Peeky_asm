@@ -6,7 +6,7 @@ import {
 import React from 'react';
 import Navigation from '../components/header/navigation';
 import Copyright from '../components/footer/copyright';
-import Wrapper from '../components/wrapper';
+import Wrapper from '../components/body/wrapper';
 
 const Home: React.FunctionComponent = () => (
   <Box w='100vw' h='100vh' bg='transparent'>
@@ -23,13 +23,13 @@ const Home: React.FunctionComponent = () => (
       fontWeight='bold'
       boxSize='full'
     >
-      <GridItem bg='transparent' area={'header'}>
+      <GridItem bg='blackAlpha.400' area={'header'}>
         <Navigation />
       </GridItem>
       <GridItem bg='transparent' area={'main'}>
         <Wrapper />
       </GridItem>
-      <GridItem bg='transparent' area={'footer'}>
+      <GridItem bg='blackAlpha.400' area={'footer'}>
         <Copyright />
       </GridItem>
     </Grid>

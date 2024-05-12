@@ -12,7 +12,7 @@ import Search from './search';
 
 const Navigation: React.FunctionComponent = () => (
   <Flex>
-    <Box bg='trasparent'>
+    <Box bg='transparent'>
       <Flex>
         <Box p='4' boxSize='100px'>
           <Image 

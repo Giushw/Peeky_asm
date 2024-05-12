@@ -1,11 +1,11 @@
+import {CurrentUnit} from "../types/response";
+
 const BASEURL = 'http://api.weatherstack.com/current';
 const APIKEY = '98d68bdf25165de43301b44738de045d';
 
 interface UrlParams {
   query: string;
 }
-
-type Units = 'm' | 'f';
 
 /**
  * Function to make HTTP requests (GET, POST, etc.) using Fetch API
@@ -17,7 +17,7 @@ type Units = 'm' | 'f';
  */
 export const fetchData = async <R = unknown>(
   method: string,
-  units: Units,
+  units: CurrentUnit,
   params: UrlParams,
 ): Promise<R> => {
 

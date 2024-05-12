@@ -1,0 +1,50 @@
+Snow:
+Heavy snow: 338, 335
+Moderate snow: 332, 329
+Light snow: 326, 323
+Patchy heavy snow: 335 (mentioned twice)
+Patchy moderate snow: 329 (mentioned twice)
+Patchy light snow: 323 (mentioned twice)
+Moderate or heavy snow showers: 371
+Light snow showers: 368
+
+Sleet:
+Moderate or heavy sleet: 320, 365
+Light sleet: 317, 362 (mentioned twice)
+Patchy moderate sleet: 320 (mentioned twice)
+Showers of ice pellets: 377, 374
+
+Freezing Rain:
+Moderate or heavy freezing rain: 314
+Light freezing rain: 311
+
+Rain:
+Torrential rain shower: 359
+Heavy rain: 308, 305
+Moderate rain: 302, 299
+Light rain: 296, 263 (mentioned twice)
+Patchy light rain: 293, 263 (mentioned twice)
+Moderate or heavy rain shower: 356, 353
+
+Thunderstorm:
+Moderate or heavy rain in area with thunder: 389
+Patchy light rain in area with thunder: 386
+Moderate or heavy snow in area with thunder: 395
+Patchy light snow in area with thunder: 392
+Thundery outbreaks in nearby: 200
+
+Fog:
+Freezing fog: 260
+Fog: 248
+Mist: 143
+
+
+Other:
+Blizzard: 230
+Blowing snow: 227
+
+Overcast: 122
+Cloudy: 119
+Partly Cloudy: 116
+
+Clear/Sunny: 113

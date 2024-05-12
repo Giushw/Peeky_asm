@@ -1,12 +1,15 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {CurrentUnit} from '../types/response';
 
 export interface City {
-  id: string; // Assuming city has a unique string id
+  id: string; 
   name: string;
 }
 
-const initialState: { cities: City[] } = {
+const initialState: { cities: City[], currentUnit: CurrentUnit, isSearching: boolean } = {
   cities: [],
+  currentUnit: 'm',
+  isSearching: false
 };
 
 const searchedCitiesSlice = createSlice({
@@ -23,8 +26,14 @@ const searchedCitiesSlice = createSlice({
         state.cities.splice(index, 1);
       }
     },
+    updateUnit(state, action: {payload: CurrentUnit}) {
+      state.currentUnit = action.payload;
+    },
+    updateIsSearching(state, action: {payload: boolean}) {
+      state.isSearching = action.payload;
+    },
   },
 });
 
-export const { addCity, removeCity } = searchedCitiesSlice.actions;
+export const {addCity, removeCity, updateUnit, updateIsSearching} = searchedCitiesSlice.actions;
 export default searchedCitiesSlice.reducer;
